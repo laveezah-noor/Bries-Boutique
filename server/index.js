@@ -15,9 +15,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors())
 
-// app.get("/", (req, res) => {
-//     res.send({ "users": ["1", "2", "3"] });
-// });
+app.get("/", (req, res) => {
+    res.send({ "users": ["1", "2", "3"] });
+});
 
 if (process.env.NODE_ENV == 'production') {
     app.use(express.static("../client/build"))
