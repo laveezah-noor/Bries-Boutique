@@ -15,15 +15,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors())
 
-app.get("/", (req, res) => {
-    res.send({ "users": ["1", "2", "3"] });
-});
+// app.get("/", (req, res) => {
+//     res.send({ "users": ["1", "2", "3"] });
+// });
 
 if (process.env.NODE_ENV == 'production') {
     app.use(express.static("../client/build"))
 }
 
-app.get("/api/products", async (req, res) => {
+app.get("/api/products", async(req, res) => {
 
     const auth = new google.auth.GoogleAuth({
         keyFile: "bries-boutique-credentials.json",
@@ -56,7 +56,7 @@ app.get("/api/products", async (req, res) => {
     res.send(keyInSheet)
 });
 
-app.get("/api/orders", async (req, res) => {
+app.get("/api/orders", async(req, res) => {
 
     const auth = new google.auth.GoogleAuth({
         keyFile: "bries-boutique-credentials.json",
@@ -89,7 +89,7 @@ app.get("/api/orders", async (req, res) => {
     res.send(keyInSheet)
 });
 
-app.get("/api/customers", async (req, res) => {
+app.get("/api/customers", async(req, res) => {
 
     const auth = new google.auth.GoogleAuth({
         keyFile: "bries-boutique-credentials.json",
@@ -129,7 +129,7 @@ app.get("/api/customers", async (req, res) => {
     res.send(keyInSheet)
 });
 
-app.get("/api/purchases", async (req, res) => {
+app.get("/api/purchases", async(req, res) => {
 
     const auth = new google.auth.GoogleAuth({
         keyFile: "bries-boutique-credentials.json",
@@ -163,7 +163,7 @@ app.get("/api/purchases", async (req, res) => {
 });
 
 
-app.get("/api/dealers", async (req, res) => {
+app.get("/api/dealers", async(req, res) => {
 
     const auth = new google.auth.GoogleAuth({
         keyFile: "bries-boutique-credentials.json",
@@ -196,15 +196,15 @@ app.get("/api/dealers", async (req, res) => {
 });
 
 // POST REQUESTS
-app.post("/api/orders", async (req, res) => {
+app.post("/api/orders", async(req, res) => {
     const {
         Date,
         Customer,
         Product,
-        Courier, 
-        DC, 
-        CheckDC, 
-        CheckPayment, 
+        Courier,
+        DC,
+        CheckDC,
+        CheckPayment,
         TrackingNo
     } = req.body;
     console.log(Date, Customer, Product, Courier, DC, CheckDC, CheckPayment, TrackingNo);
@@ -222,16 +222,16 @@ app.post("/api/orders", async (req, res) => {
 
     const spreadsheetId = "1pqKkS7yCuy-fM-LKo2YmGZwYChQOhHZhBVVP1VaqnOM";
 
-    
+
     const getRows = await googleSheets.spreadsheets.values.get({
         auth,
         spreadsheetId,
         range: "OrdersNew!B:B"
     })
     const OrderNoRows = [...getRows.data.values]
-    const lastOrder = OrderNoRows? Number(OrderNoRows[OrderNoRows.length-1][0]) : None;
-    const OrderNo = lastOrder+1;
-    
+    const lastOrder = OrderNoRows ? Number(OrderNoRows[OrderNoRows.length - 1][0]) : None;
+    const OrderNo = lastOrder + 1;
+
     Product.forEach(element => {
         console.log(element);
         // Write row(s) to spreadsheet
@@ -241,7 +241,9 @@ app.post("/api/orders", async (req, res) => {
             range: "OrderNew!A:O",
             valueInputOption: "USER_ENTERED",
             resource: {
-                values: [[Date, OrderNo, Customer.name, Customer.phone, Customer.address, Product[0].qty, Product[0].amount, 0, Product[0].code, Product[0].desc, DC, CheckDC, Courier, "", TrackingNo, CheckPayment]]
+                values: [
+                    [Date, OrderNo, Customer.name, Customer.phone, Customer.address, Product[0].qty, Product[0].amount, 0, Product[0].code, Product[0].desc, DC, CheckDC, Courier, "", TrackingNo, CheckPayment]
+                ]
             },
         });
     });
@@ -250,11 +252,16 @@ app.post("/api/orders", async (req, res) => {
 
 })
 
-app.post("/api/purchases", async (req, res) => {
+app.post("/api/purchases", async(req, res) => {
     const {
-        Date, BillNo, Dealer, Purchase, Type, Payment 
+        Date,
+        BillNo,
+        Dealer,
+        Purchase,
+        Type,
+        Payment
     } = req.body;
-    console.log(Date, Dealer, Purchase, Type, Payment );
+    console.log(Date, Dealer, Purchase, Type, Payment);
 
     const auth = new google.auth.GoogleAuth({
         keyFile: "bries-boutique-credentials.json",
@@ -278,7 +285,9 @@ app.post("/api/purchases", async (req, res) => {
             range: "PurchaseNew!A:K",
             valueInputOption: "USER_ENTERED",
             resource: {
-                values: [[Date, Date, Dealer.name, Dealer.address, Type, Purchase[0].desc, BillNo, Purchase[0].qty, Purchase[0].amount, Payment, Purchase[0].code ]]
+                values: [
+                    [Date, Date, Dealer.name, Dealer.address, Type, Purchase[0].desc, BillNo, Purchase[0].qty, Purchase[0].amount, Payment, Purchase[0].code]
+                ]
             },
         });
     });
