@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors())
 
 app.get("/", (req, res) => {
-    res.send({ "users": ["1", "2", "3"] });
+    res.sendFile('../components/Product.js')
 });
 
 if (process.env.NODE_ENV == 'production') {

@@ -8,8 +8,10 @@ import {
 import OrderForm from './components/OrderForm';
 import PurchaseForm from './components/PurchaseForm';
 import Table from './components/Table.js';
+import ProductGroup from "./components/Product"
 
 function App() {
+  
   const [customerData, setcustomerData] = useState([]);
   const [orderData, setorderData] = useState([]);
   const [purchaseData, setpurchaseData] = useState([]);
@@ -43,8 +45,11 @@ function App() {
   }, [])
   console.log(customerData)
   return (
+    // <OrderForm/>
+    
     <Router>
       <div className="App"
+      
         style={{
           display: "flex",
           justifyContent: "center",
