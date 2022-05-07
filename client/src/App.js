@@ -16,34 +16,33 @@ function App() {
   const [orderData, setorderData] = useState([]);
   const [purchaseData, setpurchaseData] = useState([]);
   const [productData, setproductData] = useState([]);
-  useEffect(() => {
-    fetch("/api/customers").then(
-      res => res.json())
-      .then(data => {
-        console.log("Customer==>",data)
-        setcustomerData(data)
-      })
-    fetch("/api/orders").then(
-      res => res.json())
-      .then(data => {
-        console.log("Order==>",data)
-        setorderData(data)
-      })
-    fetch("/api/purchases").then(
-      res => res.json())
-      .then(data => {
-        console.log("Purchases==>",data)
-        setpurchaseData(data)
-      })
-    fetch("/api/products").then(
-      res => res.json())
-      .then(data => {
-        console.log("Products==>",data)
-        setproductData(data)
-      })
+  // useEffect(() => {
+  //   fetch("/api/customers").then(
+  //     res => res.json())
+  //     .then(data => {
+  //       console.log("Customer==>",data)
+  //       setcustomerData(data)
+  //     })
+  //   fetch("/api/orders").then(
+  //     res => res.json())
+  //     .then(data => {
+  //       console.log("Order==>",data)
+  //       setorderData(data)
+  //     })
+  //   fetch("/api/purchases").then(
+  //     res => res.json())
+  //     .then(data => {
+  //       console.log("Purchases==>",data)
+  //       setpurchaseData(data)
+  //     })
+  //   fetch("/api/products").then(
+  //     res => res.json())
+  //     .then(data => {
+  //       console.log("Products==>",data)
+  //       setproductData(data)
+  //     })
 
-  }, [])
-  console.log(customerData)
+  // }, [])
   return (
     // <OrderForm/>
     
