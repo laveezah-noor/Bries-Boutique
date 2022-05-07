@@ -15,9 +15,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors())
 
-app.get("/", (req, res) => {
-    res.sendFile('../components/Product.js')
-});
+// app.get("/", (req, res) => {
+//     res.sendFile('../components/Product.js')
+// });
 
 if (process.env.NODE_ENV == 'production') {
     app.use(express.static("../client/build"))
