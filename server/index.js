@@ -36,7 +36,7 @@ app.get("/api/products", async(req, res) => {
     // Instance of Google Sheets API
     const googleSheets = google.sheets({ version: "v4", auth: client });
 
-    const spreadsheetId = "1pqKkS7yCuy-fM-LKo2YmGZwYChQOhHZhBVVP1VaqnOM";
+    const spreadsheetId = "1KqM5b_VjYUnYcNLu4o_IwXEHhmAYn8SsonSGdiTLSus";
 
     // Get metadata about spreadsheet
     const metaData = await googleSheets.spreadsheets.get({
